@@ -1,12 +1,19 @@
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import Products from "../../components/Products/Products";
+import Sort from "../../components/Sort/Sort";
+import Filter from "../../components/Filter/Filter";
 import { useState, useEffect } from "react";
 
 const SmartWatches = () => {
   const url = "https://fakestoreapi.com/products";
 
   const [products, setProducts] = useState([]);
+  const [filters, setFilters] = useState({});
+
+  const setFilterHandler = (newFilter) => {
+    setFilters({ ...filters, ...newFilter });
+  };
   useEffect(() => {
     const getProducts = async () => {
       try {
@@ -30,6 +37,8 @@ const SmartWatches = () => {
         <div>Loading...</div>
       )}
       <Products/>
+      <Filter onFilterChange={setFilterHandler} />
+      <Sort/>
       <Footer />
     </>
   );

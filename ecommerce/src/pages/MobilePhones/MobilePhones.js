@@ -9,6 +9,12 @@ const MobilePhones = () => {
   const url = "https://fakestoreapi.com/products";
 
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [price, setPrice] = useState({ min: 0, max: 0 });
+  const [filters, setFilters] = useState({ category: "", price: "" });
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [sorting, setSorting] = useState("");
+
   useEffect(() => {
     const getProducts = async () => {
       try {
@@ -16,25 +22,78 @@ const MobilePhones = () => {
         const data = await response.json();
         console.log(data);
         setProducts(data);
+
+        const uniqueCategories = [
+          ...new Set(response.data.map((product) => product.category)),
+        ];
+        setCategories(uniqueCategories);
+
+        const prices = response.data.map((product) => product.price);
+        setPrice({ min: Math.min(...prices), max: Math.max(...prices) });
       } catch (error) {
         console.error("Error fetching products:", error);
       }
     };
     getProducts();
   }, []);
+
+  useEffect(() => {
+    let filtered = [...products];
+
+    if (filters.category) {
+      filtered = filtered.filter(
+        (product) => product.category === filters.category
+      );
+    }
+
+    if (filters.price) {
+      const price = parseFloat(filters.price);
+      filtered = filtered.filter((product) => product.price <= price);
+    }
+
+    switch (sorting) {
+      case 'az':
+        filtered.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case 'za':
+        filtered.sort((a, b) => b.title.localeCompare(a.title));
+        break;
+      case 'asc':
+        filtered.sort((a, b) => a.price - b.price);
+        break;
+      case 'desc':
+        filtered.sort((a, b) => b.price - a.price);
+        break;
+      default:
+        break;
+    }
+
+    setFilteredProducts(filtered);
+  }, [filters, products, sorting]);
+
+  const setFilterHandler = (newFilter) => {
+    setFilters({ ...filters, ...newFilter });
+  };
+
+  const setSortingHandler = (newSort) => {
+    setSorting(newSort);
+  };
   return (
     <>
       <Navbar />
       <h1>MobilePhones</h1>
       <h3>description</h3>
-      {products.length > 0 ? (
-        <Products products={products} />
+      <Filter
+        categories={categories}
+        price={price}
+        onFilterChange={setFilterHandler}
+      />
+      {filteredProducts.length > 0 ? (
+        <Products products={filteredProducts} />
       ) : (
         <div>Loading...</div>
       )}
-      <Products />
-      <Filter />
-      <Sort/>
+      <Sort onSortChange={setSortingHandler} />
       <Footer />
     </>
   );
