@@ -1,20 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Filter.css";
-import Products from "../Products/Products";
+import axios from 'axios';
 
-const Filter = (products = []) => {
-  const [category, setCategory] = useState([]);
-  const [price, setPrice] = useState([]);
+const Filter = ({ categories, price, onFilterChange }) => {
+  // const [categories, setCategories] = useState([]);
+  // const [price, setPrice] = useState({ min: 0, max: 0 });
 
-  //   const categories = products.from(new Set(products.map((p) => p.category)));
-  //   const prices = products.from(new Set(products.map((p) => p.price)));
+  // useEffect(() => {
+  //   axios.get('https://fakestoreapi.com/products/categories')
+  //     .then(response => {
+  //       setCategories(response.data);
+  //     })
+  //     .catch(error => {
+  //       console.error('Error fetching categories:', error);
+  //     });
 
-  const setCategoryHandler = () => {
-    setCategory();
+  //   axios.get('https://fakestoreapi.com/products')
+  //     .then(response => {
+  //       const prices = response.data.map(product => product.price);
+  //       setPrice({ min: Math.min(...prices), max: Math.max(...prices) });
+  //     })
+  //     .catch(error => {
+  //       console.error('Error fetching price range:', error);
+  //     });
+  // }, []);
+
+  const setCategoryHandler = (event) => {
+    onFilterChange({category: event.target.value})
   };
 
-  const setPriceHandler = () => {
-    setPrice();
+  const setPriceHandler = (event) => {
+    onFilterChange({category: event.target.value})
   };
 
   return (
@@ -23,49 +39,24 @@ const Filter = (products = []) => {
         <h3>Filter products</h3>
         <br />
         <h4>Category</h4>
-        <input
-          type="checkbox"
-          id={`input-${category}`}
-          name={`input-${category}`}
-          onChange={setCategoryHandler}
-        />
-        <label for={`input-${category}`}>Men's clothing</label>
-        <br />
-        <input
-          type="checkbox"
-          id={`input-${category}`}
-          name={`input-${category}`}
-          onChange={setCategoryHandler}
-        />
-        <label for={`input-${category}`}>Women's clothing</label>
-        <br />
-        <input
-          type="checkbox"
-          id={`input-${category}`}
-          name={`input-${category}`}
-          onChange={setCategoryHandler}
-        />
-        <label for={`input-${category}`}>Jewelery</label>
-        <br />
-        <input
-          type="checkbox"
-          id={`input-${category}`}
-          name={`input-${category}`}
-          onChange={setCategoryHandler}
-        />
-        <label for={`input-${category}`}>Electronics</label>
-        <br />
+        <select onChange={setCategoryHandler}>
+          <option value="">All Categories</option>
+          {categories.map(category => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
         <h4>Price</h4>
-        <label for="price">$0</label>
         <input
           type="range"
-          id={`input-${price}`}
-          name={`input-${price}`}
-          min="0"
-          max="2000"
+          min={price.min}
+          max={price.max}
+          step="10"
           onChange={setPriceHandler}
         />
-        <label for={`input-${price}`}>$2000</label>
+        <p>Min Price: ${price.min}</p>
+        <p>Max Price: ${price.max}</p>
       </fieldset>
     </div>
   );
