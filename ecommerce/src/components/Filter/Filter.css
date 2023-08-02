@@ -1,0 +1,22 @@
+.filtering-container {
+    position: absolute;
+    top: 250px; 
+    left: 5px; 
+    z-index: 1; 
+}
+
+fieldset {
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+input[type="range"] {
+    width: 100%;
+}
