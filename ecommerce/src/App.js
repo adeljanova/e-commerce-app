@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import MobilePhones from "./pages/MobilePhones/MobilePhones";
-import SmartWatches from "./pages/SmartWatches/SmartWatches";
+import MobilePhones from "./pages/Products_1/Products_1";
+import SmartWatches from "./pages/Products_2/Products_2";
 
 const router = createBrowserRouter([
   { path: "/mobile-phones", element: <MobilePhones /> },

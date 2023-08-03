@@ -1,7 +1,6 @@
 import { AiFillStar } from "react-icons/ai";
 import Button from "../Button/Button";
 import "./Products.css"
-import Filter from "../Filter/Filter";
 
 const Products = ({ products = [] }) => {
   return (
