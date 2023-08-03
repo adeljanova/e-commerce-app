@@ -1,36 +1,12 @@
-import { useState, useEffect } from "react";
 import "./Filter.css";
-import axios from 'axios';
 
 const Filter = ({ categories, price, onFilterChange }) => {
-  // const [categories, setCategories] = useState([]);
-  // const [price, setPrice] = useState({ min: 0, max: 0 });
-
-  // useEffect(() => {
-  //   axios.get('https://fakestoreapi.com/products/categories')
-  //     .then(response => {
-  //       setCategories(response.data);
-  //     })
-  //     .catch(error => {
-  //       console.error('Error fetching categories:', error);
-  //     });
-
-  //   axios.get('https://fakestoreapi.com/products')
-  //     .then(response => {
-  //       const prices = response.data.map(product => product.price);
-  //       setPrice({ min: Math.min(...prices), max: Math.max(...prices) });
-  //     })
-  //     .catch(error => {
-  //       console.error('Error fetching price range:', error);
-  //     });
-  // }, []);
-
   const setCategoryHandler = (event) => {
-    onFilterChange({category: event.target.value})
+    onFilterChange({ category: event.target.value });
   };
 
   const setPriceHandler = (event) => {
-    onFilterChange({category: event.target.value})
+    onFilterChange({ category: event.target.value });
   };
 
   return (
@@ -41,7 +17,7 @@ const Filter = ({ categories, price, onFilterChange }) => {
         <h4>Category</h4>
         <select onChange={setCategoryHandler}>
           <option value="">All Categories</option>
-          {categories.map(category => (
+          {categories.map((category) => (
             <option key={category} value={category}>
               {category}
             </option>

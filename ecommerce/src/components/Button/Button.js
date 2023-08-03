@@ -12,8 +12,8 @@ const Button = () => {
     <div>
       <button onClick={clickHandler}>Add to cart</button>
       {message && (
-        <div className="message-container">
-          <p className="message">Item added successfully!</p>
+        <div className="button-message-container">
+          <p className="button-message">Item added successfully!</p>
         </div>
       )}
     </div>

@@ -1,4 +1,4 @@
-.message-container {
+.button-message-container {
   position: fixed;
   top: 0;
   left: 0;
@@ -9,6 +9,6 @@
   text-align: center;
 }
 
-.message {
+.button-message {
   font-size: 18px;
 }
