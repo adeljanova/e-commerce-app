@@ -6,7 +6,7 @@ import Products from "../../components/Products/Products";
 import Sort from "../../components/Sort/Sort";
 import { useEffect, useState } from "react";
 
-const MobilePhones = () => {
+const Products_1 = () => {
   const url = "https://fakestoreapi.com/products";
 
   const [products, setProducts] = useState([]);
@@ -104,4 +104,4 @@ const MobilePhones = () => {
   );
 };
 
-export default MobilePhones;
+export default Products_1;

@@ -24,24 +24,24 @@ const Navbar = () => {
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <li className="nav-item">
               <NavLink
-                to="/mobile-phones"
+                to="/"
                 className={({ isActive }) =>
                   "nav-links" + (isActive ? " activated" : "")
                 }
                 onClick={closeMobileMenuHandler}
               >
-                MobilePhones
+                Products1
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink
-                to="/smart-watches"
+                to="/products_2"
                 className={({ isActive }) =>
                   "nav-links" + (isActive ? " activated" : "")
                 }
                 onClick={closeMobileMenuHandler}
               >
-                SmartWatches
+                Products2
               </NavLink>
             </li>
           </ul>

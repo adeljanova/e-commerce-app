@@ -6,7 +6,7 @@ import Filter from "../../components/Filter/Filter";
 import { useState, useEffect } from "react";
 import Description from "../../components/Description/Description";
 
-const SmartWatches = () => {
+const Products_2 = () => {
   const url = "https://fakestoreapi.com/products";
 
   const [products, setProducts] = useState([]);
@@ -106,4 +106,4 @@ const SmartWatches = () => {
   );
 };
 
-export default SmartWatches;
+export default Products_2;
